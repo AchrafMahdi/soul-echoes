@@ -12,22 +12,25 @@
     </div>
     @endif -->
     <div>
-        <form action="/blog" class="flex justify-center py-6 gap-5">
-            <input type="text" class="bg-gray-800 text-gray-100 w-96 py-1 px-3 rounded-3xl" placeholder="Search..." name="search">
-            <button class="bg-blue-800 rounded-full px-6 py-2 text-gray-50">search</button>
-        </form>
+        <form action="/blog" class="flex flex-col justify-center py-6 gap-5">
+            <div class="self-center">
+              <input type="text" class="bg-gray-800 text-gray-100 w-96 py-1 px-3 rounded-3xl" placeholder="Search..." name="search">
+              <button class="bg-blue-800 rounded-full px-6 py-2 text-gray-50">search</button>
+            </div>
+        
 
         <div>
 
-<form class="max-w-sm mx-auto">
-  <label for="categories" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select a category</label>
-  <select id="categories" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-    <option selected>Choose a category</option>
-    <option value="US">Programming</option>
-    <option value="CA">Life</option>
-    <option value="FR">Cooking</option>
-    <option value="DE">Advice</option>
-  </select>
+
+  <div class="max-w-sm mx-auto">
+    <label for="categories" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select a category</label>
+    <select name="category" id="categories" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <option selected value="">Choose a category</option>
+      @foreach ($categories as $category)
+        <option value="{{ $category->title }}">{{ $category->title }}</option>
+      @endforeach
+    </select>
+  </div>
 </form>
 
         </div>

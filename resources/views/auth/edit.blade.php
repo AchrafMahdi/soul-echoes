@@ -32,13 +32,7 @@
             <input value="{{ $user->email }}" type="email" id="email" name="email" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" required aria-describedby="email-error">              
           </div>
       </div>
-
-      <div>
-          <label for="email" class="block text-sm mb-2 dark:text-white">Password</label>
-          <div class="relative">
-            <input disabled type="password" value="{{ $user->password }}" id="" name="" class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" required aria-describedby="email-error">
-          </div>
-      </div>
+    
 
       <div class=" w-fit self-end mt-4">
         <button type="submit" class="w-full py-3 px-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">Save changes</button>

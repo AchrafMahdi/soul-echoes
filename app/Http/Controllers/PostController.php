@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -13,15 +14,26 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::latest();
+        $categories = Category::all();
 
-        if (request('search')) {
+        if (request('search') != "") {
             $posts
             ->where('title', 'like', '%'. request('search'). '%')
             ->orWhere('body', 'like', '%'. request('search'). '%');
         }
 
+        if (request('category')) {                        
+            $category = Category::whereRaw('LOWER(title) = ?', [strtolower(request('category'))])->first();
+            
+            if ($category) {
+                $posts
+                ->where('category_id', 'like', '%'. $category->id. '%');
+            }
+        }
+
         return view('blog.index', [
-            'posts' => $posts->get()
+            'posts' => $posts->get(),
+            'categories' => $categories
         ]);
     }
 
@@ -29,8 +41,10 @@ class PostController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        return view("blog.create");
+    {    
+        return view("blog.create",[
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -69,7 +83,8 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($post);
         return view('blog.edit',[
-            'post' => $post
+            'post' => $post,
+            'categories' => Category::all()
         ]);
     }
 
@@ -84,10 +99,10 @@ class PostController extends Controller
             'title' => 'required|string',
             'slug' => 'required|string|unique:posts,title|min:3|max:21',
             'body' => 'required|string|min:3',
-            'image' => 'string|nullable'
+            'image' => 'string|nullable',
+            'category_id' => 'exists:categories,id|required'
         ]);
         $attributes['user_id'] = auth()->user()->id;
-        $attributes['category_id'] = 1;
 
         $post->update($attributes);
         return redirect('/blog/'.$post->id);

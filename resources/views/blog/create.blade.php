@@ -25,7 +25,17 @@
         <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
         @enderror
     </div>
-
+    <div class="flex flex-col items-start gap-1">
+        <label class="text-white font-medium text-2xl">Category</label>
+        <div class="w-full">
+            <select name="category_id" id="categories" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected value="">Choose a category</option>
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->title }}</option>
+            @endforeach
+            </select>
+        </div>
+    </div>
     <div class="flex flex-col items-start gap-1">
         <label class="text-white font-medium text-2xl">Body</label>
         <textarea  class="border border-gray-400 rounded-md px-5 py-1 bg-transparent text-gray-100 md:w-[900px] h-72" name="body"></textarea>

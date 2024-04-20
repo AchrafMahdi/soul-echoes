@@ -52,8 +52,13 @@
         
         @endif
     </div>    
+    <div class="">
+    <a href="/blog?category={{ $post->category->title }}" class="inline-flex items-center gap-x-1.5 py-1.5 px-4 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-800/30 dark:text-blue-500">
+        {{ $post->category->title }}
+    </a>
+    </div>
             @if ($post->image)
-            <img src="{{ $post->image }}" class=" rounded-md" />                 
+            <img src="{{ $post->image }}" class="rounded-md" />
             @endif
         <h1 class="text-gray-50 font-bold text-4xl">
             {{ $post->title }}
@@ -62,7 +67,7 @@
         <div class="flex flex-col gap-2">
             {!! $post->body !!}
         </div>
-    </div>
+    </div>    
     <a  href="/blog">
     <button class="bg-blue-800 w-60 rounded-full px-6 py-2 text-gray-50"> back to blogs</button>
     </a>
